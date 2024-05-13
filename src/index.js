@@ -1,3 +1,3 @@
-/* @flow */
+import WysiwygEditor from "./Editor";
 
-export { default as Editor } from "./Editor";
+export { WysiwygEditor as Editor };
