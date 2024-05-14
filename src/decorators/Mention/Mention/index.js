@@ -9,27 +9,33 @@ class Mention {
   }
   getMentionComponent = () => {
     const className = this.className;
-    const MentionComponent = ({ entityKey, children, contentState }) => {
+
+    const MentionComponent = (props) => {
+      const { entityKey, children, contentState } = props;
       const { url, value } = contentState.getEntity(entityKey).getData();
+
       return (
-        <a
-          href={url || value}
+        <span
+          data-submission-id="123"
           className={classNames("rdw-mention-link", className)}
         >
           {children}
-        </a>
+        </span>
       );
     };
+
     MentionComponent.propTypes = {
       entityKey: PropTypes.number,
       children: PropTypes.array,
-      contentState: PropTypes.object
+      contentState: PropTypes.object,
     };
+
     return MentionComponent;
   };
+
   getMentionDecorator = () => ({
     strategy: this.findMentionEntities,
-    component: this.getMentionComponent()
+    component: this.getMentionComponent(),
   });
 }
 
@@ -38,7 +44,7 @@ Mention.prototype.findMentionEntities = (
   callback,
   contentState
 ) => {
-  contentBlock.findEntityRanges(character => {
+  contentBlock.findEntityRanges((character) => {
     const entityKey = character.getEntity();
     return (
       entityKey !== null &&
