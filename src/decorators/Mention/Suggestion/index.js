@@ -227,6 +227,11 @@ function getSuggestionComponent() {
       const editorState = config.getEditorState();
       const { onChange, separator, trigger } = config;
       const selectedMention = this.filteredSuggestions[activeOption];
+      console.log({
+        selectedMention,
+        state: this.state,
+        config,
+      });
       if (selectedMention) {
         addMention(editorState, onChange, separator, trigger, selectedMention);
       }
@@ -273,6 +278,7 @@ function getSuggestionComponent() {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: 6,
+                    cursor: "pointer",
                   }}
                 >
                   {suggestion.image}
